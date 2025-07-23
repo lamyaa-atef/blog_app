@@ -71,7 +71,3 @@ blog_app/
 
 - Make sure your MySQL and Apache servers are running.
 - All pages are connected using shared database logic via `db.php`.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
