@@ -143,5 +143,5 @@ This project is for learning and personal use. You are free to modify and extend
 ---
 
 ## ✨ Author
-- **Your Name**  
+- **Lamyaa Atef**  
   Built as a practice project to learn **PHP** and **MySQL** with role-based authentication.
