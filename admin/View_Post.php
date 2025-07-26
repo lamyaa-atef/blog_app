@@ -1,5 +1,18 @@
 <?php
 include '../db.php';
+session_name('admin_session');
+session_start();
+if (!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
 
 // Fetch post data for viewing
 $postID = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -18,6 +31,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($link);
+$adminName = $_SESSION['admin_name'] ?? 'Admin'; // Default if name is missing
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +58,21 @@ mysqli_close($link);
     </style>
 </head>
 <body>
+    <div class="container" style="margin-top: 20px;">
+        <div class="clearfix">
+            <h1 style="display:inline-block;margin:0;">View Post Record</h1>
+            <div class="pull-right">
+                <span class="btn btn-default disabled">Welcome, <?php echo htmlspecialchars($adminName); ?></span>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <hr>
+        <a href="index.php" class="btn btn-default">Home</a>
+        <a href="users.php" class="btn btn-info">View Users Data</a>
+        <a href="posts.php" class="btn btn-primary">View Posts Data</a>
+        <hr>
+    </div>
     <div class="container">
-        <h1>View Post Record</h1><hr>
         
         <div class="post-info">
             <div>
@@ -57,6 +84,10 @@ mysqli_close($link);
                 <span><?php echo nl2br(htmlspecialchars($postData['content'])); ?></span>
             </div>
             <div>
+                <label>Author:</label>
+                <span><?php echo htmlspecialchars($postData['author']); ?></span>
+            </div>
+            <div>
                 <label>Created At:</label>
                 <span><?php echo htmlspecialchars($postData['created_at']); ?></span>
             </div>
@@ -66,3 +97,4 @@ mysqli_close($link);
     </div>
 </body>
 </html>
+

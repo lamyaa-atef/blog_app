@@ -1,5 +1,18 @@
 <?php
 include '../db.php';
+session_name('admin_session');
+session_start();
+if (!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -51,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO users (Name, Email, Password, Gender, Mail_Status) VALUES ('$name', '$email', '$hashedPassword', '$gender', '$mail_status')";
 
         if (mysqli_query($link, $query)) {
-            header("Location: ./index.php");
+            header("Location: ./users.php");
             exit;
         } else {
             echo  "<p>".$query . "<br>" . mysqli_error($link)."</p>";
@@ -61,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close the database connection
 mysqli_close($link);
+$adminName = $_SESSION['admin_name'] ?? 'Admin'; // Default if name is missing
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +88,21 @@ mysqli_close($link);
     <title>User Registration Form</title>
 </head>
 <body>
+    <div class="container" style="margin-top: 20px;">
+        <div class="clearfix">
+            <h1 style="display:inline-block;margin:0;">Create New User</h1>
+            <div class="pull-right">
+                <span class="btn btn-default disabled">Welcome, <?php echo htmlspecialchars($adminName); ?></span>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <hr>
+        <a href="index.php" class="btn btn-default">Home</a>
+        <a href="users.php" class="btn btn-info">View Users Data</a>
+        <a href="posts.php" class="btn btn-primary">View Posts Data</a>
+        <hr>
+    </div>
     <div class="container">
-        <h1>User Registration Form</h1><hr>
         <p>Please fill this form and submit to add user record to the database.</p>
         <form action="" method="POST">
             <div class="form-group">
@@ -109,6 +136,7 @@ mysqli_close($link);
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="reset" class="btn btn-default">Reset</button>
+            <a href="./users.php" class="btn btn-default">Cancel</a>
         </form>
     </div>
 </body>

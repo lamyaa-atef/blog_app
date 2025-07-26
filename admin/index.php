@@ -1,13 +1,14 @@
 <?php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'blog_app';
-$link = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    include '../db.php';
+    session_name('admin_session');
+    session_start();
+    if (!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email'])) {
+        header("Location: login.php");
+        exit();
+    }
 
-if (!$link) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+
+    $adminName = $_SESSION['admin_name'] ?? 'Admin'; // Default if name is missing
 ?>
 
 <!DOCTYPE html>
@@ -16,23 +17,20 @@ if (!$link) {
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <style>
-        body {
-            padding: 30px;
-        }
-        .dashboard-btn {
-            width: 200px;
-            margin: 10px;
-            font-size: 18px;
-        }
-    </style>
 </head>
 <body>
-<div class="container text-center">
-    <h1>Admin Dashboard</h1>
-    <br><br>
-    <button onclick="window.location.href='users.php'" class="btn btn-primary dashboard-btn">View Users Data</button>
-    <button onclick="window.location.href='posts.php'" class="btn btn-success dashboard-btn">View Posts Data</button>
+<div class="container" style="margin-top: 20px;">
+    <div class="clearfix">
+        <h1 style="display:inline-block;margin:0;">Admin Dashboard</h1>
+        <div class="pull-right">
+            <span class="btn btn-default disabled">Welcome, <?php echo htmlspecialchars($adminName); ?></span>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+    <hr>
+    <a href="index.php" class="btn btn-default">Home</a>
+    <a href="users.php" class="btn btn-info">View Users Data</a>
+    <a href="posts.php" class="btn btn-primary">View Posts Data</a>
 </div>
 </body>
 </html>
