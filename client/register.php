@@ -1,5 +1,7 @@
 <?php
 include '../db.php';
+session_name('client_session');
+session_start();
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -53,9 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$hasError) {
         $query = "INSERT INTO users (Name, Email, Password, Gender, Mail_Status) VALUES ('$name', '$email', '$hashedPassword', '$gender', '$mail_status')";
         if (mysqli_query($link, $query)) {
-            echo "<div class='alert alert-success' style='width: 400px;'>You Registered successfully!</div>";
-            //header("Location: ./index.php");
-            //exit;
+            header("Location: ./login.php");
+            exit;
         } else {
             echo  "<p>".$query . "<br>" . mysqli_error($link)."</p>";
         }
@@ -78,7 +79,7 @@ mysqli_close($link);
 </head>
 <body>
     <div class="container">
-        <h1>User Registration</h1><hr>
+        <h1>Register to the Blog App</h1><hr>
         <p>Please fill this form to register.</p>
         <form action="" method="POST">
             <div class="form-group">

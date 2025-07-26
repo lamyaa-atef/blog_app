@@ -1,20 +1,33 @@
-<?php include '../db.php'; ?>
-
 <?php
+include '../db.php';
+session_name('client_session');
+session_start(); // 👈 required to access session
+if (!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
 $message = "";
+
+// Check if user is logged in
+if (!isset($_SESSION['user_email'])) {
+    header("Location: login.php");
+    exit;
+}
 
 if (isset($_POST['submit'])) {
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
+    $author = $_SESSION['user_email']; // 👈 use logged-in email as author
 
     if (empty($title) || empty($content)) {
         $message = "<p style='color: darkred; margin-top: 10px; width: 887px; font-weight: bold; padding: 10px; background-color: #f8d7da; border-left: 5px solid red; border-radius: 5px;'>
             <span style='color:red;'>Error:</span> Title and Content are required.</p>";
     } else {
-        $stmt = $link->prepare("INSERT INTO posts (title, content) VALUES (?, ?)");
-        $stmt->bind_param("ss", $title, $content);
+        $stmt = $link->prepare("INSERT INTO posts (title, content, author) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $title, $content, $author);
         if ($stmt->execute()) {
-            //$message = "<div class='alert alert-success' style='width: 400px;'>Post added successfully!</div>";
             header("Location: index.php");
             exit;
         } else {
@@ -24,6 +37,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

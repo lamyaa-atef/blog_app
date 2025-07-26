@@ -1,4 +1,12 @@
-<?php include '../db.php'; ?>
+<?php 
+    include '../db.php';
+    session_name('client_session');
+    session_start();
+    if (!isset($_SESSION['user_email']) && !isset($_SESSION['admin_email'])) {
+        header("Location: login.php");
+        exit();
+    } 
+?>
 <?php
 $id = $_GET['id'];
 $post = $link->query("SELECT * FROM posts WHERE id=$id")->fetch_assoc();
