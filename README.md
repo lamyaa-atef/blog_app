@@ -36,7 +36,11 @@ blog_app/
 │   ├── profile.php         # User profile
 │   └── register.php        # User registration
 │
+├── assets/
+│   └── logo.png
+│
 ├── db.php                  # Database connection
+├── favicon.ico
 └── README.md               # Project documentation
 ```
 
