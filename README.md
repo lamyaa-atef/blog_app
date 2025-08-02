@@ -37,10 +37,10 @@ blog_app/
 │   └── register.php        # User registration
 │
 ├── assets/
-│   └── logo.png
+│   └── logo.png            # Blog App logo
 │
 ├── db.php                  # Database connection
-├── favicon.ico
+├── favicon.ico             # Site icon
 └── README.md               # Project documentation
 ```
 
@@ -85,7 +85,8 @@ blog_app/
    ```
 
 3. **Import the SQL schema**
-   - Create a `users` and `posts` table according to your application structure.
+   - Create `users` and `posts` tables according to your application structure.
+
    - Example `users` table:
      ```sql
      CREATE TABLE users (
@@ -132,12 +133,18 @@ blog_app/
 ---
 
 ## 🔐 Default Admin Account
-- You can manually insert an admin into the `users` table:
+- Manually insert an admin into the `users` table:
   ```sql
   INSERT INTO users (Name, Email, Password, Role) 
   VALUES ('Admin', 'admin@example.com', 'hashed_password', 'admin');
   ```
   *(Use `password_hash()` in PHP to create the password.)*
+
+---
+
+## 🖼️ Logo & Favicon
+- Project logo: `assets/logo.png`
+- Favicon: `favicon.ico`
 
 ---
 
