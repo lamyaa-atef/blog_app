@@ -28,6 +28,8 @@ $adminName = $_SESSION['admin_name'] ?? 'Admin';
 <head>
     <meta charset="UTF-8">
     <title>All Posts</title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>

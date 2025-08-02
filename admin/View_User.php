@@ -33,6 +33,8 @@ $pageTitle = $isAdmin ? "View Admin Record" : "View User Record";
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         .user-info {
