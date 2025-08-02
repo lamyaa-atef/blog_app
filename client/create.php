@@ -48,10 +48,23 @@ if (isset($_POST['submit'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Create Post</title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
+
 </head>
 <body>
+    <div class="container" style="margin-top: 20px;">
+        <div class="header-flex">
+            <h1 style="display:inline-block;margin:0;">Create New Post</h1>
+            <div class="pull-right">
+                <a href="profile.php" class="btn btn-info">
+                    Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?>
+                </a>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <hr>
+    </div>
     <div class="container">
-        <h1>Create New Post</h1><hr>
         <p>Please fill this form to add a post.</p>
 
         <?php echo $message; ?>

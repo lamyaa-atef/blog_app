@@ -76,10 +76,16 @@ mysqli_close($link);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>User Registration Form</title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
+
 </head>
 <body>
-    <div class="container">
-        <h1>Register to the Blog App</h1><hr>
+    <div class="container" style="margin-top: 20px;">
+        <div class="header-flex" style="display:flex;align-items:center;">
+            <img src="../assets/logo.png" alt="Blog App Logo" style="height:50px; margin-right:10px;">
+            <h1 style="display:inline-block;margin:0;">Register to the Blog App</h1>
+        </div>
+        <hr>
         <p>Please fill this form to register.</p>
         <form action="" method="POST">
             <div class="form-group">

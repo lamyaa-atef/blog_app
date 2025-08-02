@@ -29,11 +29,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container" style="max-width: 500px; margin-top: 50px;">
-    <h2>Login</h2><hr>
+<div class="container" style="max-width: 500px; margin-top: 90px;">
+    <div class="header-flex" style="display:flex;align-items:center;">
+        <img src="../assets/logo.png" alt="Blog App Logo" style="height:50px; margin-right:10px;">
+        <h1 style="display:inline-block;margin:0;">Login</h1>
+    </div>
+    <hr>
     <?php if (!empty($error)): ?>
         <div class="alert alert-danger" style="width: 400px;"><?php echo $error; ?></div>
     <?php endif; ?>

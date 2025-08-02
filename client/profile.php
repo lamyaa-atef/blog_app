@@ -32,6 +32,8 @@ $postStmt->close();
 <head>
     <meta charset="UTF-8">
     <title>User Profile</title>
+    <link rel="icon" type="image/x-icon" href="/blog_app/favicon.ico">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         .user-info { margin-top: 25px; }
