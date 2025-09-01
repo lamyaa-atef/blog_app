@@ -15,8 +15,19 @@ $stmt = $link->prepare("SELECT Role FROM users WHERE Email = ?");
 $stmt->bind_param("s", $userEmail);
 $stmt->execute();
 $stmt->bind_result($role);
-$stmt->fetch();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 $stmt->close();
+
+// ✅ Prevent deleting the last admin account
+if ($user['Role'] === 'admin') {
+    $check = $link->query("SELECT COUNT(*) AS total FROM users WHERE Role='admin'");
+    $count = $check->fetch_assoc()['total'];
+    if ($count <= 1) {
+        header("Location: profile.php?msg=CannotDeleteLastAdmin");
+        exit();
+    }
+}
 
 // ✅ Delete all posts by this user
 $stmt = $link->prepare("DELETE FROM posts WHERE author = ?");
