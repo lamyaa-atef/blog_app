@@ -60,6 +60,7 @@ $adminName = $_SESSION['admin_name'] ?? 'Admin';
                     <th>Content</th>
                     <th>Author</th>
                     <th>Created At</th>
+                    <th>Updated At</th>
                     <th>Actions</th>
                 </tr>";
             while ($row = mysqli_fetch_assoc($result)) {
@@ -69,6 +70,7 @@ $adminName = $_SESSION['admin_name'] ?? 'Admin';
                     <td>" . htmlspecialchars(substr($row['content'], 0, 100)) . "...</td>
                     <td>" . htmlspecialchars($row['author']) . "</td>
                     <td>{$row['created_at']}</td>
+                    <td>{$row['updated_at']}</td>
                     <td>
                         <a href='View_Post.php?id={$row['id']}' title='View'><i class='fas fa-eye'></i></a>&nbsp;";
                 

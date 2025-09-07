@@ -20,7 +20,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 
 // Fetch posts created by this user
-$postStmt = $link->prepare("SELECT id, title, content, created_at FROM posts WHERE author = ? ORDER BY created_at DESC");
+$postStmt = $link->prepare("SELECT id, title, content, created_at, updated_at FROM posts WHERE author = ? ORDER BY created_at DESC");
 $postStmt->bind_param("s", $userEmail);
 $postStmt->execute();
 $userPosts = $postStmt->get_result();
@@ -81,7 +81,10 @@ $postStmt->close();
                     <?= nl2br(htmlspecialchars(substr($post['content'], 0, 200))) ?>...
                 </div>
                 <div class="panel-footer">
-                    <small>Created At: <?= htmlspecialchars($post['created_at']) ?></small><br><br>
+                    <small>Created At: <?= htmlspecialchars($post['created_at']) ?></small><br>
+                    <?php if($post['updated_at'] != null){?>
+                        <small>Updated At: <?= htmlspecialchars($post['updated_at']) ?></small><br>
+                    <?php }?><br>
                     <a href="edit.php?id=<?= $post['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
                     <a href="delete.php?id=<?= $post['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
                 </div>

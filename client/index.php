@@ -49,15 +49,20 @@
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<div class='panel panel-default'>";
-            echo "<div class='panel-heading'><h3 class='panel-title'>" . htmlspecialchars($row['title']) . "</h3></div>";
+            echo "<div class='panel-heading' style='display:flex; justify-content:space-between; align-items:center;'>";
+            echo "<h3 class='panel-title' style='margin:0;'>" . htmlspecialchars($row['title']) . "</h3>";
+            echo "<small>Author: " . htmlspecialchars($row['author']) . "</small>";
+            echo "</div>";
             echo "<div class='panel-body'>" . nl2br(htmlspecialchars($row['content'])) . "</div>";
             echo "<div class='panel-footer'>";
-            echo "<small>Author: " . htmlspecialchars($row['author']) . "</small><br>";
-            echo "<small>Created At: " . htmlspecialchars($row['created_at']) . "</small>";
+            echo "<small>Created At: " . htmlspecialchars($row['created_at']) . "</small><br>";
+            if($row['updated_at'] != null){
+                echo "<small>Updated At: " . htmlspecialchars($row['updated_at']) . "</small><br>";
+            }
 
             // Show edit/delete only if current user is the post author
             if (isset($_SESSION['user_email']) && $_SESSION['user_email'] === $row['author']) {
-                echo "<br><br>";
+                echo "<br>";
                 echo "<a href='edit.php?id={$row['id']}' class='btn btn-primary btn-sm'>Edit</a> ";
                 echo "<a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this post?\")'>Delete</a>";
             }
